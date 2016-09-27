@@ -1,4 +1,9 @@
-function event(state = {}, action)
+function persistEvents(state)
+{
+	window.localStorage.setItem('events', JSON.stringify(state)); 
+}
+
+function event(state = { title: null, address: null, tags: [] }, action)
 {
 	switch(action.type)
 	{
@@ -11,16 +16,24 @@ function event(state = {}, action)
 
 function events(state = {}, action)
 {
+	let newState;
+
 	switch(action.type)
 	{
 		case 'SAVE_EVENT':
-			return {
+			newState = {
 				...state,
 				[action.id]: event(state[action.id], action)
 			};
+
+			persistEvents(newState);
+
+			return newState;
 		case 'DELETE_EVENT':
-			const newState = { ...state };
+			newState = { ...state };
 			delete newState[action.id];
+
+			persistEvents(newState);
 
 			return newState;
 		default:

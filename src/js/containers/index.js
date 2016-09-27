@@ -6,13 +6,14 @@ import { changeFilter } from '../actions/index';
 
 function getFilteredEvents(events, filter)
 {
-	return _.filter(events, (event) => event.tags.indexOf(filter) > -1);
+	if(filter)
+		return _.filter(events, (event) => event.tags.indexOf(filter) > -1);
+	else
+		return _.toArray(events);
 }
 
 function mapStateToProps(state)
 {
-	console.log(state);
-	
 	return {
 		events: getFilteredEvents(state.events, state.filter)
 	}

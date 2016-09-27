@@ -15,6 +15,7 @@ function onSelect(id)
 const EventMap = ({ events, onSelect }) => (
 	<div className="event-map">
 		<h1>Event Map</h1>
+		<pre>{JSON.stringify(events, null, 2)}</pre>
 	</div>
 );
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { compose, createStore } from 'redux';
 
 import reducers from './reducers/index';
 import Modal from './components/modal';
 
-const store = createStore(reducers);
+const store = createStore(reducers, { events: JSON.parse(window.localStorage.getItem('events') || '{}') }, window.devToolsExtension && window.devToolsExtension());
 
 export default class App extends Component
 {

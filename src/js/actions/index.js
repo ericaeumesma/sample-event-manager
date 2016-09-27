@@ -1,23 +1,24 @@
-let nextEventId = 1;
+let nextEventId = window.localStorage.getItem('nextEventId') || 1;
 
-export const saveEvent = (event) => {
-	return {
-		type: 'SAVE_EVENT',
-		id: event.id ? event.id : nextEventId++,
-		event
+export function saveEvent(event)
+{
+	let id = event.id;
+	
+	if(!id)
+	{
+		id = nextEventId++;
+		window.localStorage.setItem('nextEventId', nextEventId);
 	}
-};
 
-export const deleteEvent = (id) => {
-	return {
-		type: 'DELETE_EVENT',
-		id
-	}
-};
+	return { type: 'SAVE_EVENT', id, event };
+}
 
-export const changeFilter = (filter) => {
-	return {
-		type: 'CHANGE_FILTER',
-		filter
-	}
-};
+export function deleteEvent(id)
+{
+	return { type: 'DELETE_EVENT', id };
+}
+
+export function changeFilter(filter)
+{
+	return { type: 'CHANGE_FILTER', filter };
+}
