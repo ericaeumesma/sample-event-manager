@@ -1,13 +1,23 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
+import { Router, IndexRoute, Route, useRouterHistory } from 'react-router';
+import createHashHistory from 'history/lib/createHashHistory';
 
-const app = (
-	<div className="wrapper">
-		<div>
-			<h1>Index</h1>
-			<img className="lol" src="assets/lol.gif" />
-		</div>
-	</div>
-);
+import App from './components/app';
+import Index from './components/index';
+import EventDetails from './components/event-details';
+import EventCreate from './components/event-create';
+import EventUpdate from './components/event-update';
 
-render(app, document.querySelector('#app'));
+const history = useRouterHistory(createHashHistory)({ queryKey: false });
+
+render((
+<Router history={history}>
+	<Route path="/" component={App}>
+		<IndexRoute component={Index} />
+		<Route path="/event/create" component={EventCreate} />
+		<Route path="/event/:id/update" component={EventUpdate} />
+		<Route path="/event/:id" component={EventDetails} />
+	</Route>
+</Router>
+), document.querySelector('#app'));
