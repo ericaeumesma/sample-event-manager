@@ -1,9 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default function EventUpdate({ children, returnTo })
+const EventUpdate = ({ event, onSave, onDelete }) => (
+	<div className="event-detail">
+		<h1>Event Update</h1>
+		<pre>{JSON.stringify(event)}</pre>
+	</div>
+);
+
+EventUpdate.propTypes =
 {
-	return	<div className="index-view">
-				<h1>EventUpdate View</h1>
-			</div>;
-}
+	event: PropTypes.object.isRequired,
+	onSave: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired
+};
+
+export default EventUpdate;

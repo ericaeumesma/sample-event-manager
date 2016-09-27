@@ -3,11 +3,11 @@ import { render } from 'react-dom';
 import { Router, IndexRoute, Route, useRouterHistory } from 'react-router';
 import createHashHistory from 'history/lib/createHashHistory';
 
-import App from './components/app';
-import Index from './components/index';
-import EventDetails from './components/event-details';
-import EventCreate from './components/event-create';
-import EventUpdate from './components/event-update';
+import App from './app';
+import Index from './containers/index';
+import EventDetails from './containers/event-details';
+import EventCreate from './containers/event-create';
+import EventUpdate from './containers/event-update';
 
 const history = useRouterHistory(createHashHistory)({ queryKey: false });
 

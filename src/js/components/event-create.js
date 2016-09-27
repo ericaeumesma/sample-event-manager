@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default function EventCreate({ children, returnTo })
+const EventCreate = ({ onSave }) => (
+	<div className="event-detail">
+		<h1>Event Create</h1>
+	</div>
+);
+
+EventCreate.propTypes =
 {
-	return	<div className="index-view">
-				<h1>EventCreate View</h1>
-			</div>;
-}
+	onSave: PropTypes.func.isRequired
+};
+
+export default EventCreate;

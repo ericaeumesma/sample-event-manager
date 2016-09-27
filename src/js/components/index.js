@@ -1,9 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default function Index({ children, returnTo })
+import EventFilter from './event-filter';
+import EventList from './event-list';
+import EventMap from './event-map';
+
+const Index = ({ onFilterChange, events }) =>
+(
+	<div className="index">
+		<div className="index--left-pane">
+			<EventFilter onChange={onFilterChange} />
+			<EventList events={events} />
+		</div>
+		<div className="index--right-pane">
+			<EventMap events={events} />
+		</div>
+	</div>
+);
+
+Index.propTypes =
 {
-	return	<div className="index-view">
-				<h1>Index View</h1>
-			</div>;
+	onFilterChange: PropTypes.func.isRequired,
+	events: PropTypes.array.isRequired
 }
+
+export default Index;
