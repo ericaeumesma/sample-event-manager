@@ -7,7 +7,9 @@ var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var changed = require('gulp-changed');
 var sass = require('gulp-sass');
-var cleanCSS = require('gulp-clean-css');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 var sourcemaps = require('gulp-sourcemaps');
 var argv = require('minimist')(process.argv.slice(2));
 var spawn = require('child_process').spawn;
@@ -79,6 +81,11 @@ gulp.task('html', function()
 
 gulp.task('styles', function ()
 {
+	var processors =
+	[
+		autoprefixer({browsers: ['last 2 version']})
+    ];
+
 	var mainSassFiles = _.flatten([config.styles]).map(function(file)
 	{
 		return path.join(SRC, '/sass/', file);
@@ -88,13 +95,15 @@ gulp.task('styles', function ()
 
 	if(PRODUCTION)
 	{
+		processors.push(cssnano());
 		stream = stream.pipe(sass().on('error', sass.logError))
-					.pipe(cleanCSS());
+					.pipe(postcss(processors));
 	}
 	else
 	{
 		stream = stream.pipe(sourcemaps.init())
 					.pipe(sass().on('error', sass.logError))
+					.pipe(postcss(processors))
 					.pipe(sourcemaps.write('./'));
 	}
 
