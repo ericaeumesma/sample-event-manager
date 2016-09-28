@@ -7,10 +7,12 @@ function onFormSubmit(form, callback)
 	{
 		title: form.title.value,
 		address: form.address.value,
+		date: form.date.value,
+		tags: form.tags.value.replace(/ /g,'').split(','),
 		imageURL: form.imageURL.value
 	};
 
-	if(event.title && event.address && event.imageURL)
+	if(event.title && event.address && event.date && event.imageURL)
 	{
 		callback(event);
 	}
@@ -19,9 +21,9 @@ function onFormSubmit(form, callback)
 const EventCreate = ({ onSave }) => (
 	<div className="event-detail">
 		<h1>Event Create</h1>
-		<form onSubmit={(event) => {
-			event.preventDefault();
-			onFormSubmit(event.target, onSave);
+		<form onSubmit={(e) => {
+			e.preventDefault();
+			onFormSubmit(e.target, onSave);
 		}}>
 			<div>
 				<label>Title</label>
@@ -32,8 +34,16 @@ const EventCreate = ({ onSave }) => (
 				<input name="address" />
 			</div>
 			<div>
+				<label>Date</label>
+				<input name="date" type="date" />
+			</div>
+			<div>
 				<label>Image URL</label>
 				<input name="imageURL" />
+			</div>
+			<div>
+				<label>Tags (separate with commas)</label>
+				<input name="tags" />
 			</div>
 			<div>
 				<button>Save</button>

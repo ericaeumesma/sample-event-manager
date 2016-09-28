@@ -2,28 +2,37 @@ import _ from 'underscore';
 import { connect } from 'react-redux';
 
 import Index from '../components/index';
-import { changeFilter } from '../actions/index';
+import { changeFilter, deleteEvent, selectEvent } from '../actions/index';
 
 function getFilteredEvents(events, filter)
 {
+	const filterTags = (filter || '').replace(/ /g, '').split(',');
+
 	if(filter)
-		return _.filter(events, (event) => event.tags.indexOf(filter) > -1);
+	{
+		return _.filter(events, ({tags}) => _.intersection(tags, filterTags).length > 0);
+	}
 	else
+	{
 		return _.toArray(events);
+	}
 }
 
 function mapStateToProps(state)
 {
 	return {
-		currentLocation: state.currentLocation,
-		events: getFilteredEvents(state.events, state.filter)
+		currentFilter: state.filter,
+		selectedEventId: state.events.selectedEventId,
+		events: getFilteredEvents(state.events.items, state.filter)
 	}
 }
 
 function mapDispatchToProps(dispatch)
 {
 	return {
-		onFilterChange: (filter) => dispatch(changeFilter(filter))
+		onFilterChange: (filter) => dispatch(changeFilter(filter)),
+		onSelect: (event) => dispatch(selectEvent(event.id)),
+		onDelete: (event) => confirm('Do you really want to delete this event?') && dispatch(deleteEvent(event.id))
 	}
 }
 

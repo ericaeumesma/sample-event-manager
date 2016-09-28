@@ -9,15 +9,19 @@ const API_KEY =  process.env.REACT_APP_GMAPS_API_KEY;
 const DEFAULT_CENTER = { lat: +23.603280200000004, lng: +46.6386296 };
 const DEFAULT_ZOOM = 13;
 
+let lastPosition = null;
+
 class EventMap extends Component
 {
 	constructor(props, context)
 	{
 		super(props, context);
+		top.m = this;
 		this.state =
 		{
-			defaultCenter: null,
-			currentPosition: null,
+			defaultCenter: lastPosition,
+			currentCenter: lastPosition,
+			currentPosition: lastPosition,
 			geolocation: !!navigator.geolocation
 		};
 	}
@@ -34,6 +38,8 @@ class EventMap extends Component
 
 	componentWillUnmount()
 	{
+		this.unmounted = true;
+
 		if(navigator.geolocation)
 		{
 			navigator.geolocation.clearWatch(this.watchID);
@@ -42,7 +48,12 @@ class EventMap extends Component
 
 	onLocationChange({ coords })
 	{
-		const currentPosition =
+		// we can't abort navigator.geolocation.getCurrentPosition,
+		// so, we have to check if the component is mounted before
+		// setting a new state 
+		if(this.unmounted) return;
+
+		const currentPosition = lastPosition =
 		{
 			lat: coords.latitude,
 			lng: coords.longitude
@@ -52,7 +63,24 @@ class EventMap extends Component
 
 		if(this.state.defaultCenter == null)
 		{
-			this.setState({ defaultCenter: currentPosition });	
+			this.setState(
+			{
+				defaultCenter: currentPosition,
+				currentCenter: currentPosition
+			});
+		}
+	}
+
+	componentWillReceiveProps(nextProps)
+	{
+		if(this.props.selectedEventId != nextProps.selectedEventId)
+		{
+			const selectedEvent = _.findWhere(this.props.events, { id: nextProps.selectedEventId });
+			if(selectedEvent)
+			{
+				this.setState({ currentCenter: selectedEvent.coords }, () =>
+					this.setState({ currentCenter: null }));
+			}
 		}
 	}
 
@@ -62,30 +90,31 @@ class EventMap extends Component
 		return events;
 	}
 
-	onSelect(id)
-	{
-		// todo on event selected on map
-	}
-
 	render()
 	{
-		const { events } = this.props;
-		const { currentPosition, defaultCenter, geolocation } = this.state;
+		const { events, selectedEventId, onClick } = this.props;
+		const {
+			currentPosition,
+			defaultCenter,
+			currentCenter,
+			geolocation 
+		} = this.state;
 
 		if(!geolocation || (geolocation && defaultCenter))
 		{
 			return	<div className="event-map">
 						<GoogleMap
-							yesIWantToUseGoogleMapApiInternals={true}
 							bootstrapURLKeys={{ key: API_KEY }}
 							defaultCenter={defaultCenter || DEFAULT_CENTER}
+							center={currentCenter}
 							defaultZoom={DEFAULT_ZOOM} >
-							<CurrentPositionMarker lat={-23.603237600000003} lng={-46.6385656} />
+							<CurrentPositionMarker {...currentPosition} />
 							{ _.map(events, (event) => (
 								<EventMarker
 									lat={event.coords.lat}
 									lng={event.coords.lng}
 									event={event}
+									onClick={() => onClick(event)}
 									key={event.id} />
 							)) }
 						</GoogleMap>
@@ -100,8 +129,10 @@ class EventMap extends Component
 
 EventMap.propTypes =
 {
+	selectedEventId: PropTypes.number,
 	events: PropTypes.array.isRequired,
-	currentPosition: PropTypes.object
+	currentPosition: PropTypes.object,
+	onClick: PropTypes.func
 };
 
 export default EventMap;

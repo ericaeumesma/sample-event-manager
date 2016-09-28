@@ -5,24 +5,36 @@ import EventFilter from './event-filter';
 import EventList from './event-list';
 import EventMap from './event-map';
 
-const Index = ({ events, currentLocation, onFilterChange }) =>
+const Index = ({ events, selectedEventId, currentLocation, currentFilter, onFilterChange, onSelect, onDelete }) =>
 (
 	<div className="index">
 		<div className="index--left-pane">
-			<EventFilter onChange={onFilterChange} />
-			<EventList events={events} />
+			<Link className="index--create-event-button" to="/event/create">Create Event</Link>
+			<input className="event-filter--input"
+				placeholder="Search for a tag..."
+				onChange={(e) => onFilterChange(e.target.value)}
+				value={currentFilter || ''} />
+			<EventList
+				events={events}
+				selectedEventId={selectedEventId}
+				onClick={onSelect}
+				onTagClick={onFilterChange}
+				onDelete={onDelete} />
 		</div>
 		<div className="index--right-pane">
-			<EventMap events={events} currentLocation={currentLocation} />
+			<EventMap events={events} selectedEventId={selectedEventId} onClick={onSelect} />
 		</div>
 	</div>
 );
 
 Index.propTypes =
 {
+	currentFilter: PropTypes.string,
+	selectedEventId: PropTypes.number,
 	events: PropTypes.array.isRequired,
-	currentLocation: PropTypes.object,
-	onFilterChange: PropTypes.func.isRequired
+	onFilterChange: PropTypes.func.isRequired,
+	onDelete: PropTypes.func,
+	onSelect: PropTypes.func
 }
 
 export default Index;

@@ -1,18 +1,63 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const EventUpdate = ({ event, onSave, onDelete }) => (
+function onFormSubmit(form, originalEvent, callback)
+{
+	const event =
+	{
+		...originalEvent,
+		title: form.title.value,
+		address: form.address.value,
+		date: form.date.value,
+		tags: form.tags.value.replace(/ /g,'').split(','),
+		imageURL: form.imageURL.value
+	};
+
+	if(event.title && event.address && event.date && event.imageURL)
+	{
+		callback(event);
+	}
+}
+
+const EventCreate = ({ event, onDelete, onSave }) => (
 	<div className="event-detail">
 		<h1>Event Update</h1>
-		<pre>{JSON.stringify(event)}</pre>
+		<form onSubmit={(e) => {
+			e.preventDefault();
+			onFormSubmit(e.target, event, onSave);
+		}}>
+			<div>
+				<label>Title</label>
+				<input name="title" defaultValue={event.title} />
+			</div>
+			<div>
+				<label>Address</label>
+				<input name="address" defaultValue={event.address}  />
+			</div>
+			<div>
+				<label>Date</label>
+				<input name="date" type="date" defaultValue={event.date}  />
+			</div>
+			<div>
+				<label>Image URL</label>
+				<input name="imageURL" defaultValue={event.imageURL}  />
+			</div>
+			<div>
+				<label>Tags (separate with commas)</label>
+				<input name="tags" defaultValue={event.tags.join(',')}  />
+			</div>
+			<div>
+				<button>Save</button>
+			</div>
+		</form>
 	</div>
 );
 
-EventUpdate.propTypes =
+EventCreate.propTypes =
 {
 	event: PropTypes.object.isRequired,
 	onSave: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired
 };
 
-export default EventUpdate;
+export default EventCreate;

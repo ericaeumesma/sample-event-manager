@@ -6,7 +6,7 @@ import { deleteEvent } from '../actions/index';
 function mapStateToProps(state, ownProps)
 {
 	return {
-		event: state.events[ownProps.params.id]
+		event: state.events.items[ownProps.params.id]
 	}
 }
 
