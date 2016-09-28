@@ -3,12 +3,14 @@ import { Link } from 'react-router';
 
 function onFormSubmit(form, callback)
 {
+	let tags = form.tags.value.replace(/ /g,'');
+
 	const event =
 	{
 		title: form.title.value,
 		address: form.address.value,
 		date: form.date.value,
-		tags: form.tags.value.replace(/ /g,'').split(','),
+		tags: tags.length > 0 ? tags.split(',') : null,
 		imageURL: form.imageURL.value
 	};
 

@@ -16,7 +16,7 @@ class EventMap extends Component
 	constructor(props, context)
 	{
 		super(props, context);
-		top.m = this;
+
 		this.state =
 		{
 			defaultCenter: lastPosition,

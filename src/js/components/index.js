@@ -14,12 +14,14 @@ const Index = ({ events, selectedEventId, currentLocation, currentFilter, onFilt
 				placeholder="Search for a tag..."
 				onChange={(e) => onFilterChange(e.target.value)}
 				value={currentFilter || ''} />
-			<EventList
-				events={events}
-				selectedEventId={selectedEventId}
-				onClick={onSelect}
-				onTagClick={onFilterChange}
-				onDelete={onDelete} />
+			<div className="index--event-list-wrapper">
+				<EventList
+					events={events}
+					selectedEventId={selectedEventId}
+					onClick={onSelect}
+					onTagClick={onFilterChange}
+					onDelete={onDelete} />
+			</div>
 		</div>
 		<div className="index--right-pane">
 			<EventMap events={events} selectedEventId={selectedEventId} onClick={onSelect} />
