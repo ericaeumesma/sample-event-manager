@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import EventFilter from './event-filter';
 import EventList from './event-list';
 import EventMap from './event-map';
 
@@ -10,7 +9,7 @@ const Index = ({ events, selectedEventId, currentLocation, currentFilter, onFilt
 	return	<div className="index">
 				<div className="index--left-pane">
 					<Link className="index--create-event-button" to="/event/create">Create a new event</Link>
-					<input className="event-filter--input"
+					<input className="index--filter-input"
 						placeholder="Search for a tag..."
 						onChange={(e) => onFilterChange(e.target.value)}
 						value={currentFilter || ''} />

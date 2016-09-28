@@ -1,0 +1,91 @@
+.event-list-item
+{
+	height: 70px;
+	display: flex;
+	background: #fff;
+	cursor: pointer;
+	&:nth-child(odd) { background: $lighter-grey; }
+	&:hover, &:focus, &.selected { background: $light-grey; }
+	// border-bottom: 1px solid $light-grey;
+	// &:first-child { border-top: 1px solid $light-grey; }
+	&:last-child { border-bottom: 1px solid $light-grey; }
+}
+
+.event-list-item--left-pane
+{
+	flex: 1;
+	padding: 5px 10px;
+}
+
+.event-list-item--title
+{
+	font-weight: bold;
+}
+
+.event-list-item--date
+{
+	margin-left: 5px;
+	font-size: 0.8em;
+	color: #888;
+}
+
+.event-list-item--address
+{
+	display: block;
+	font-size: 0.8em;
+}
+
+.event-list-item--tag
+{
+	font-size: 0.7em;
+	display: inline-block;
+	margin-right: 3px;
+	padding: 3px 6px;
+	border-radius: 3px;
+	background: $blue;
+	color: #fff;
+	opacity: 0.5;
+	transition: opacity 150ms linear;
+}
+
+.event-list-item--tag
+{
+	&:hover, &:focus { opacity: 0.8; }
+}
+
+.event-list-item--right-pane
+{
+	height: 100%;
+	display: flex;
+}
+
+.event-list-item--button
+{
+	display: block;
+	width: 45px;
+	height: 100%;
+	opacity: 0.2;
+	transition: opacity 140ms linear;
+	cursor: pointer;
+	color: #fff;
+    text-align: center;
+    font-size: 20px;
+    vertical-align: middle;
+    line-height: 70px;
+
+	&:hover, &:focus
+	{
+		color: #fff;
+		opacity: 0.5;
+	}
+}
+
+.event-list-item--update-button
+{
+	background: $blue;
+}
+
+.event-list-item--delete-button
+{
+	background: $red;
+}

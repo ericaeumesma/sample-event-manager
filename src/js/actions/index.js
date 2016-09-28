@@ -1,3 +1,5 @@
+import API_KEY from '../gmaps-api-key';
+
 let nextEventId = window.localStorage.getItem('nextEventId') || 1;
 
 export function saveEventStart(event)
@@ -20,12 +22,20 @@ export function saveEventWithCoords(event, coords)
 
 export function saveEventSuccess()
 {
-	return { type: 'SAVE_EVENT_SUCCESS' };
+	return function(dispatch)
+	{
+		dispatch({ type: 'SAVE_EVENT_SUCCESS' });
+		window.location.hash = '#';
+	}
 }
 
 export function saveEventError(event, error)
 {
-	return { type: 'SAVE_EVENT_ERROR', event, error };
+	return function(dispatch)
+	{
+		dispatch({ type: 'SAVE_EVENT_ERROR', event, error });
+		alert('An error occured when trying to save your event.');
+	}
 }
 
 export function saveEvent(event)
@@ -34,7 +44,7 @@ export function saveEvent(event)
 	{
 		dispatch(saveEventStart());
 
-		return fetch(`http://maps.google.com/maps/api/geocode/json?address=${event.address}`)
+		return fetch(`https://maps.google.com/maps/api/geocode/json?key=${API_KEY}&address=${event.address}`)
 		.then((result) => result.json())
 		.then((json) => json.results[0].geometry.location)
 		.then((coords) => dispatch(saveEventWithCoords(event, coords)))

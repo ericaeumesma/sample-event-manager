@@ -1,0 +1,23 @@
+.event-marker
+{
+	user-select: none;
+}
+
+.event-marker
+{
+	cursor: pointer;
+	margin-left: -16px;
+	margin-top: -32px;
+
+	.event-details
+	{
+		@media (max-width: 750px) { display: none; }
+
+		position: absolute;
+		width: 300px;
+		border: 1px solid $light-grey;
+		bottom: 40px;
+		left: -150px;
+		z-index: 10;
+	}
+}

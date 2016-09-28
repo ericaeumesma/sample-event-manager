@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 function onFormSubmit(form, originalEvent, callback)
 {
@@ -21,37 +22,40 @@ function onFormSubmit(form, originalEvent, callback)
 }
 
 const EventCreate = ({ event, onDelete, onSave }) => (
-	<div className="event-detail">
-		<h1>Event Update</h1>
-		<form onSubmit={(e) => {
-			e.preventDefault();
-			onFormSubmit(e.target, event, onSave);
-		}}>
-			<div>
+	<form className="event-update panel panel-default"
+		onSubmit={(e) => {
+		e.preventDefault();
+		onFormSubmit(e.target, event, onSave);
+	}}>
+		<div className="panel-heading">Update event</div>
+		<div className="panel-body">
+			<div className="form-group">
 				<label>Title</label>
-				<input name="title" defaultValue={event.title} />
+				<input className="form-control" name="title" defaultValue={event.title} />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Address</label>
-				<input name="address" defaultValue={event.address}  />
+				<input className="form-control" name="address" defaultValue={event.address}  />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Date</label>
-				<input name="date" type="date" defaultValue={event.date}  />
+				<input className="form-control" name="date" type="date" defaultValue={event.date}  />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Image URL</label>
-				<input name="imageURL" defaultValue={event.imageURL}  />
+				<input className="form-control" name="imageURL" defaultValue={event.imageURL}  />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Tags (separate with commas)</label>
-				<input name="tags" defaultValue={(event.tags || []).join(',')}  />
+				<input className="form-control" name="tags" defaultValue={(event.tags || []).join(',')}  />
 			</div>
-			<div>
-				<button>Save</button>
-			</div>
-		</form>
-	</div>
+		</div>
+		<div className="panel-footer text-right">
+			<Link className="btn btn-default" to="/">Cancel</Link>
+			{' '}
+			<button className="btn btn-primary">Save</button>
+		</div>
+	</form>
 );
 
 EventCreate.propTypes =

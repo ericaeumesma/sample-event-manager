@@ -1,0 +1,51 @@
+.event-details
+{
+	background: #fff;
+	padding: 20px;
+}
+
+.event-details--image
+{
+	background-size: cover;
+	background-position: 50% 50%;
+	margin: -20px -20px 20px -20px;
+	height: 100px;
+}
+
+.event-details--title,
+.event-details--date,
+.event-details--address
+{
+	display: block;
+}
+
+.event-details--title
+{
+	font-weight: bold;
+	font-size: 1.3em;
+	margin-bottom: 6px;
+}
+
+.event-details--date
+{
+	color: #888;
+	margin-bottom: 12px;
+}
+
+.event-details--address
+{
+	margin-bottom: 12px;
+}
+
+.event-details--tag
+{
+	font-size: 0.7em;
+	display: inline-block;
+	margin-right: 3px;
+	padding: 3px 6px;
+	border-radius: 3px;
+	background: $blue;
+	color: #fff;
+	opacity: 0.5;
+	transition: opacity 150ms linear;
+}

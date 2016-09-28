@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 function onFormSubmit(form, callback)
 {
@@ -20,37 +21,40 @@ function onFormSubmit(form, callback)
 }
 
 const EventCreate = ({ onSave }) => (
-	<div className="event-detail">
-		<h1>Event Create</h1>
-		<form onSubmit={(e) => {
+	<form className="event-create panel panel-default"
+		onSubmit={(e) => {
 			e.preventDefault();
 			onFormSubmit(e.target, onSave);
 		}}>
-			<div>
+		<div className="panel-heading">Create a new event</div>
+		<div className="panel-body">
+			<div className="form-group">
 				<label>Title</label>
-				<input name="title" />
+				<input className="form-control" name="title" />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Address</label>
-				<input name="address" />
+				<input className="form-control" name="address" />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Date</label>
-				<input name="date" type="date" />
+				<input className="form-control" name="date" type="date" />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Image URL</label>
-				<input name="imageURL" />
+				<input className="form-control" name="imageURL" />
 			</div>
-			<div>
+			<div className="form-group">
 				<label>Tags (separate with commas)</label>
-				<input name="tags" />
+				<input className="form-control" name="tags" />
 			</div>
-			<div>
-				<button>Save</button>
-			</div>
-		</form>
-	</div>
+		</div>
+		<div className="panel-footer text-right">
+			<Link className="btn btn-default" to="/">Cancel</Link>
+			{' '}
+			<button className="btn btn-primary">Save</button>
+		</div>
+	</form>
 );
 
 EventCreate.propTypes =

@@ -1,0 +1,74 @@
+.mobile-event-details
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.7);
+	z-index: 11;
+	padding: 20px;
+
+	@media (min-width: 751px) { display: none; }
+
+	.event-details
+	{
+		border: 1px solid $light-grey;
+
+		&.event-details--no-image
+		{
+			padding-top: 60px;
+		}
+	}
+
+	.event-details--image
+	{
+		height: 190px;
+	}
+}
+
+.mobile-event-details--toolbar
+{
+	position: absolute;
+	width: calc(100% - 40px);
+	height: 40px;
+	border-top: 1px solid $light-grey;
+	border-left: 1px solid $light-grey;
+	border-right: 1px solid $light-grey;
+}
+
+.mobile-event-details--button
+{
+	height: 40px;
+	line-height: 40px;
+	width: 40px;
+	display: inline-block;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	opacity: 0.85;
+	transition: opacity 140ms linear;
+
+	&:hover, &:focus
+	{
+		color: #fff;
+		opacity: 1;
+	} 
+}
+
+.mobile-event-details--back-button
+{
+	background: $blue;
+}
+
+.mobile-event-details--update-button
+{
+	float: right;
+	background: $blue;
+}
+
+.mobile-event-details--delete-button
+{
+	float: right;
+	background: $red;
+}

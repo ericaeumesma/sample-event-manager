@@ -1,0 +1,32 @@
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+$lighter-grey: #fafafa;
+$light-grey: #f0f0f4;
+$blue: #3498db;
+$red: #e74c3c;
+
+.hide
+{
+	display: none !important;
+}
+
+.app
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@import 'current-position-marker';
+@import 'event-create';
+@import 'event-details';
+@import 'event-list-item';
+@import 'event-list';
+@import 'event-map';
+@import 'event-marker';
+@import 'event-update';
+@import 'index';
+@import 'mobile-event-details';

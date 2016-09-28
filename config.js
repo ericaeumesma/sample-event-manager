@@ -4,7 +4,7 @@ module.exports =
 	src: './src',
 	dest: './dist',
 	html: 'index.html',
-	styles: 'index.scss',
+	styles: 'main.scss',
 	javascript:
 	{
 		entry: { index: 'index.js' },

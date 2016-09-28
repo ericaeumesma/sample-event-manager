@@ -5,7 +5,7 @@ import GoogleMap from 'google-map-react';
 import CurrentPositionMarker from './current-position-marker';
 import EventMarker from './event-marker';
 
-const API_KEY =  process.env.REACT_APP_GMAPS_API_KEY;
+import API_KEY from '../gmaps-api-key';
 const DEFAULT_CENTER = { lat: +23.603280200000004, lng: +46.6386296 };
 const DEFAULT_ZOOM = 13;
 
