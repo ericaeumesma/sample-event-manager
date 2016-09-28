@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 
 function onFormSubmit(form, originalEvent, callback)
 {
@@ -46,7 +45,7 @@ const EventCreate = ({ event, onDelete, onSave }) => (
 			</div>
 			<div>
 				<label>Tags (separate with commas)</label>
-				<input name="tags" defaultValue={event.tags.join(',')}  />
+				<input name="tags" defaultValue={(event.tags || []).join(',')}  />
 			</div>
 			<div>
 				<button>Save</button>

@@ -4,7 +4,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import reducers from './reducers/index';
-import Modal from './components/modal';
+import MobileEventDetails from './containers/mobile-event-details';
 
 const store = createStore(
 	reducers,
@@ -15,28 +15,13 @@ const store = createStore(
 	)
 );
 
-export default class App extends Component
-{
-	componentWillReceiveProps(nextProps)
-	{
-		if(nextProps.location.key !== this.props.location.key &&
-			nextProps.location.state &&
-			nextProps.location.state.modal)
-		{
-			this.previousChildren = this.props.children;
-		}
-	}
+const App = ({children}) => (
+	<Provider store={store}>
+		<div className="app">
+			<MobileEventDetails />
+			{children}
+		</div>
+	</Provider>
+);
 
-	render()
-	{
-		const { location } = this.props;
-		const isModal = location.state && location.state.modal && this.previousChildren;
-
-		return	<Provider store={store}>
-					<div className="app">
-						{ isModal ? this.previousChildren : this.props.children }
-						{ isModal && <Modal returnTo={location.state.returnTo}>{this.props.children}</Modal> }
-					</div>
-				</Provider>;
-	}
-}
+export default App;

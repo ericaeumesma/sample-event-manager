@@ -114,6 +114,7 @@ class EventMap extends Component
 									lat={event.coords.lat}
 									lng={event.coords.lng}
 									event={event}
+									showDetails={event.id === selectedEventId}
 									onClick={() => onClick(event)}
 									key={event.id} />
 							)) }

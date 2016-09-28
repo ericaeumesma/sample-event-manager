@@ -5,7 +5,6 @@ import createHashHistory from 'history/lib/createHashHistory';
 
 import App from './app';
 import Index from './containers/index';
-import EventDetails from './containers/event-details';
 import EventCreate from './containers/event-create';
 import EventUpdate from './containers/event-update';
 
@@ -17,7 +16,6 @@ render((
 		<IndexRoute component={Index} />
 		<Route path="/event/create" component={EventCreate} />
 		<Route path="/event/:id/update" component={EventUpdate} />
-		<Route path="/event/:id" component={EventDetails} />
 	</Route>
 </Router>
 ), document.querySelector('#app'));

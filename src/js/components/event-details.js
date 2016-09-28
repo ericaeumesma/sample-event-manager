@@ -1,17 +1,15 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import _ from 'underscore';
+import React from 'react';
+import moment from 'moment';
 
-const EventDetails = ({ event, onDelete }) => (
-	<div className="event-detail">
-		<h1>Event Details</h1>
-		<pre>{JSON.stringify(event)}</pre>
+const EventDetails = ({event}) => (
+	<div className="event-details">
+		{ event.imageURL && <div className="event-details--image" style={{backgroundImage: `url(${event.imageURL})`}} /> }
+		<span className="event-details--title">{event.title}</span>
+		<span className="event-details--date">{moment(event.date).format('DD/MM/YYYY')}</span>
+		<span className="event-details--address">{event.address}</span>
+		{_.map(event.tags, (tag) => <span key={tag} className="event-details--tag">{tag}</span>)}
 	</div>
 );
-
-EventDetails.propTypes =
-{
-	event: PropTypes.object.isRequired,
-	onDelete: PropTypes.func.isRequired
-};
 
 export default EventDetails;
