@@ -9,7 +9,7 @@ const Index = ({ events, selectedEventId, currentLocation, currentFilter, onFilt
 (
 	<div className="index">
 		<div className="index--left-pane">
-			<Link className="index--create-event-button" to="/event/create">Create Event</Link>
+			<Link className="index--create-event-button" to="/event/create">Create a new event</Link>
 			<input className="event-filter--input"
 				placeholder="Search for a tag..."
 				onChange={(e) => onFilterChange(e.target.value)}

@@ -18,12 +18,17 @@ function getFilteredEvents(events, filter)
 	}
 }
 
+function orderByDate(events)
+{
+	return _.sortBy(events, 'date');
+}
+
 function mapStateToProps(state)
 {
 	return {
 		currentFilter: state.filter,
 		selectedEventId: state.events.selectedEventId,
-		events: getFilteredEvents(state.events.items, state.filter)
+		events: orderByDate(getFilteredEvents(state.events.items, state.filter))
 	}
 }
 

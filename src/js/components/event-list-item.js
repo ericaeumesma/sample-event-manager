@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 
 function stopPropagationAndPreventDefault(e)
 {
@@ -12,7 +13,7 @@ const EventListItem = ({ event, onClick, onTagClick, onDelete }) => (
 	<div className="event-list-item" onClick={onClick}>
 		<div className="event-list-item--left-pane">
 			<span className="event-list-item--title">{event.title}</span>
-			<span className="event-list-item--date">{event.date}</span>
+			<span className="event-list-item--date">{moment(event.date).format('DD/MM/YYYY')}</span>
 			<span className="event-list-item--address">{event.address}</span>
 			{_.map(event.tags, (tag) => (
 				<span key={tag}
