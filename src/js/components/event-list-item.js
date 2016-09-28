@@ -23,9 +23,13 @@ const EventListItem = ({ event, onClick, onTagClick, onDelete }) => (
 		<div className="event-list-item--right-pane">
 			<Link to={`event/${event.id}/update`}
 				className="event-list-item--button event-list-item--update-button"
-				onClick={(e) => { e.stopPropagation(); }}/>
+				onClick={(e) => { e.stopPropagation(); }}>
+				<span className="glyphicon glyphicon-pencil" />
+			</Link>
 			<span className="event-list-item--button event-list-item--delete-button"
-				onClick={(e) => { stopPropagationAndPreventDefault(e); onDelete(); }} />
+				onClick={(e) => { stopPropagationAndPreventDefault(e); onDelete(); }}>
+				<span className="glyphicon glyphicon-remove" />
+			</span>
 		</div>
 	</div>
 );
