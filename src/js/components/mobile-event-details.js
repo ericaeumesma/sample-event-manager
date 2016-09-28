@@ -6,8 +6,8 @@ import EventDetails from './event-details';
 const MobileEventDetails = ({ event, onClose, onDelete }) => {
 	if(!event) return null;
 
-	return	<div className="mobile-event-details">
-				<div className="mobile-event-details--toolbar">
+	return	<div className="mobile-event-details" onClick={(e) => e.target == e.currentTarget && onClose()}>
+				<div className="mobile-event-details--toolbar" onClick={(e) => e.stopPropagation()}>
 					<span className="mobile-event-details--button mobile-event-details--back-button"
 						onClick={onClose}>
 						<span className="glyphicon glyphicon-chevron-left" />
