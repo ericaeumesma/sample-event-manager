@@ -5,7 +5,11 @@ import { compose, createStore } from 'redux';
 import reducers from './reducers/index';
 import Modal from './components/modal';
 
-const store = createStore(reducers, { events: JSON.parse(window.localStorage.getItem('events') || '{}') }, window.devToolsExtension && window.devToolsExtension());
+const store = createStore(
+	reducers,
+	{ events: JSON.parse(window.localStorage.getItem('events') || '{}') },
+	window.devToolsExtension && window.devToolsExtension()
+);
 
 export default class App extends Component
 {
@@ -25,7 +29,7 @@ export default class App extends Component
 		const isModal = location.state && location.state.modal && this.previousChildren;
 
 		return	<Provider store={store}>
-					<div>
+					<div className="app">
 						{ isModal ? this.previousChildren : this.props.children }
 						{ isModal && <Modal returnTo={location.state.returnTo}>{this.props.children}</Modal> }
 					</div>

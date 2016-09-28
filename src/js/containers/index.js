@@ -15,6 +15,7 @@ function getFilteredEvents(events, filter)
 function mapStateToProps(state)
 {
 	return {
+		currentLocation: state.currentLocation,
 		events: getFilteredEvents(state.events, state.filter)
 	}
 }
