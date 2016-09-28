@@ -288,6 +288,11 @@ $red: #e74c3c;
 	.event-details
 	{
 		border: 1px solid $light-grey;
+
+		&.event-details--no-image
+		{
+			padding-top: 60px;
+		}
 	}
 
 	.event-details--image
@@ -315,13 +320,13 @@ $red: #e74c3c;
 	text-align: center;
 	color: #fff;
 	cursor: pointer;
-	opacity: 0.6;
+	opacity: 0.85;
 	transition: opacity 140ms linear;
 
 	&:hover, &:focus
 	{
 		color: #fff;
-		opacity: 0.9;
+		opacity: 1;
 	} 
 }
 

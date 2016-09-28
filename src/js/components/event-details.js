@@ -3,7 +3,7 @@ import React from 'react';
 import moment from 'moment';
 
 const EventDetails = ({event}) => (
-	<div className="event-details">
+	<div className={'event-details' + (!event.imageURL ? ' event-details--no-image' : '') }>
 		{ event.imageURL && <div className="event-details--image" style={{backgroundImage: `url(${event.imageURL})`}} /> }
 		<span className="event-details--title">{event.title}</span>
 		<span className="event-details--date">{moment(event.date).format('DD/MM/YYYY')}</span>

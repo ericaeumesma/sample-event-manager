@@ -13,7 +13,7 @@ function onFormSubmit(form, callback)
 		imageURL: form.imageURL.value
 	};
 
-	if(event.title && event.address && event.date && event.imageURL)
+	if(event.title && event.address && event.date)
 	{
 		callback(event);
 	}
